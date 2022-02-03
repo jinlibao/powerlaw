@@ -1280,6 +1280,10 @@ class Exponential(Distribution):
         from numpy import log
         return self.xmin - (1/self.Lambda) * log(1-r)
 
+    def _generate_random_discrete_estimate(self, r):
+        from numpy import log, exp
+        return self.xmin - (1/self.Lambda) * log((self.Lambda * (1 - r)) / (1 - exp(-self.Lambda)))
+
 class Stretched_Exponential(Distribution):
 
     def parameters(self, params):
